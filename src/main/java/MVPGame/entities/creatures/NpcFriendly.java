@@ -7,8 +7,13 @@ import MVPGame.entities.fightInterface.NotFight;
  */
 public class NpcFriendly extends Creature {
 
-    public NpcFriendly(String name, int health) {
-        super(name, health);
+    public NpcFriendly(){
+//        setName("DefaultNpcFriendly");
         setFightingInterface(new NotFight());
     }
+
+//    public NpcFriendly(String name, int health) {
+//        super(name, health);
+//        setFightingInterface(new NotFight());
+//    }
 }

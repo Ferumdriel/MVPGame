@@ -9,16 +9,16 @@ import MVPGame.entities.player.Player;
 public class Battle {
     private Entity e1;
     private Entity e2;
-    BattleInitiator battleInitiator;
 
     public Battle(BattleInitiator battleInitiator){
-        this.battleInitiator = battleInitiator;
         this.e1 = battleInitiator.getE1();
         this.e2 = battleInitiator.getE2();
     }
 
     public void resolveBattle(){
+        int k = 1;
         while(areBothPlayersAlive()){
+            System.out.println("-------ROUND " + k++ + " -------");
             if(areBothPlayersAlive()) {
                hitPlayer(e1,e2);
             }
@@ -32,10 +32,9 @@ public class Battle {
     }
 
     private void printPlayersHealth(){
-        System.out.println("--------------------------------");
+        System.out.println("-------STATS AFTER ROUND-------");
         System.out.println(e1);
         System.out.println(e2);
-        System.out.println("--------------------------------");
     }
 
     private void addExpToWinner(){

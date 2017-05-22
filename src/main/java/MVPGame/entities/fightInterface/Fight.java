@@ -16,12 +16,16 @@ public class Fight implements FightingInterface{
         this.dmg = dmg;
     }
 
-
-
-
-
     public int fight() {
         Random r = new Random();
         return r.nextInt(dmg);
+    }
+
+    public void setDmg(int dmg) {
+        this.dmg = dmg;
+    }
+
+    public int getDmg() {
+        return dmg;
     }
 }

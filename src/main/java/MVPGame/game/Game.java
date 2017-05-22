@@ -2,6 +2,9 @@ package MVPGame.game;
 
 import MVPGame.entities.Entity;
 import MVPGame.entities.creatures.Creature;
+import MVPGame.entities.creatures.monsters.Undertaker;
+import MVPGame.entities.creatures.monsters.Wasp;
+import MVPGame.entities.creatures.monsters.WitchHag;
 import MVPGame.entities.player.Player;
 import MVPGame.events.battle.BattleInitiator;
 
@@ -37,7 +40,15 @@ public class Game {
             System.out.println(player);
         }else if(tmp.equals("2")) {
             Random r = new Random();
-            Entity creature = new Creature("Hiena Cmentarna", 100);
+            int number = r.nextInt(100);
+            Entity creature = new Creature();
+            if(number < 50) {
+                creature = new Undertaker();
+            }else if(number >=50 && number < 80){
+                creature = new Wasp();
+            }else{
+                creature = new WitchHag();
+            }
             BattleInitiator battleInitiator = new BattleInitiator(player, creature);
         }else if (tmp.equals("3")){
             finish = true;

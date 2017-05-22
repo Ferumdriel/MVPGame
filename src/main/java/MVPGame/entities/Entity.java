@@ -12,14 +12,19 @@ public abstract class Entity {
     private String name;
     private FightingInterface fightingInterface; //Fighter by default
 
-
-    public Entity(String name, int health){
-        this.name = name;
-        maxHealth = health;
-        this.health = maxHealth;
+    public Entity(){
+        name = getClass().getSimpleName();
+        maxHealth = 100;
+        health = maxHealth;
         fightingInterface = new Fight();
-
     }
+
+//    public Entity(String name, int health){
+//        this.name = name;
+//        maxHealth = health;
+//        this.health = maxHealth;
+//        fightingInterface = new Fight();
+//    }
 
     public abstract int resolveFight();
 
@@ -57,5 +62,14 @@ public abstract class Entity {
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartingHealth(int health){
+        this.maxHealth = health;
+        this.health = maxHealth;
     }
 }
