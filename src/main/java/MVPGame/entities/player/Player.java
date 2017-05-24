@@ -1,17 +1,21 @@
 package MVPGame.entities.player;
 
 import MVPGame.entities.Entity;
+import MVPGame.parser.json.CreateJsonFromObject;
+import MVPGame.parser.xml.CreateXmlFromObject;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by nazwa on 2017-05-17.
  */
+@XmlRootElement(name="player")
 public class Player extends Entity {
     public static final int healthGain = 50;
 
     private int exp;
     private int level;
     private int[] expRange = {0,100,200,300,400,500,600};
-
 
     public Player(String name, int health){
         super(name,health);
@@ -35,6 +39,12 @@ public class Player extends Entity {
         setHealth(getMaxHealth());
     }
 
+    public void savePlayer(){
+        CreateJsonFromObject.create(this,getName());
+//        CreateXmlFromObject.create(this,getName());
+        System.out.println("Player saved.");
+    }
+
 
     @Override
     public int resolveFight() {
@@ -49,5 +59,25 @@ public class Player extends Entity {
 
     public int[] getExpRange() {
         return expRange;
+    }
+
+    public static int getHealthGain() {
+        return healthGain;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setExpRange(int[] expRange) {
+        this.expRange = expRange;
     }
 }
