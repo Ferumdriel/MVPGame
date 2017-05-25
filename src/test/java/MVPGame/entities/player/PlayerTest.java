@@ -17,24 +17,34 @@ public class PlayerTest {
 
     @Test
     public void whenExpIsAboveExpNeededToNextLevelThenLevelUp(){
-        int expectedLevel = player.getLevel() + 1;
+        int expectedLevel = player.getCurrentLevel().getLevel() + 1;
 
-        player.addExp(player.getExpRange()[player.getLevel()]);
-        Assert.assertEquals(player.getLevel(),expectedLevel);
+        player.addExp(player.getCurrentLevel().getExpToNextLevel());
+        Assert.assertEquals(player.getCurrentLevel().getLevel(),expectedLevel);
         Assert.assertEquals(player.getHealth(),player.getMaxHealth());
     }
 
     @Test
     public void whenLevelUpThenMaxHealthIsIncreased(){
         int previousMaxHealth = player.getMaxHealth();
-        player.addExp(player.getExpRange()[player.getLevel()]);
+        player.addExp(player.getCurrentLevel().getExpToNextLevel());
         Assert.assertEquals(player.getMaxHealth(),previousMaxHealth + Player.healthGain);
     }
 
     @Test
     public void whenLevelUpThenHealthIsSetToMaxHealth(){
         player.setHealth(player.getHealth()/2);
-        player.addExp(player.getExpRange()[player.getLevel()]);
+        player.addExp(player.getCurrentLevel().getExpToNextLevel());
         Assert.assertEquals(player.getHealth(),player.getMaxHealth());
+    }
+    @Test
+    public void whenLoadingPlayerAndSomeFieldsAreMissingThenReturnNull(){
+        Player tmp = Player.loadPlayer("TestWronglySavedCharacter");
+        Assert.assertNull(tmp);
+    }
+    @Test
+    public void whenLoadingPlayerAndAllFieldsAreCorrectThenReturnPlayer(){
+        Player tmp = Player.loadPlayer("TestProperlySavedCharacter");
+        Assert.assertNotNull(tmp);
     }
 }

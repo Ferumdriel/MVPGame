@@ -1,0 +1,11 @@
+{
+  "health": 150,
+  "maxHealth": 150,
+  "name": "TestWronglySavedCharacter",
+  "fightingInterface": {
+    "type": "MVPGame.entities.fightInterface.Fight",
+    "data": {
+      "dmg": 10
+    }
+  }
+}
