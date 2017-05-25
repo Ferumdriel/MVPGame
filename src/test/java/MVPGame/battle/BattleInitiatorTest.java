@@ -17,7 +17,6 @@ import static org.junit.Assert.*;
 public class BattleInitiatorTest {
     private Entity player;
     private Entity creature;
-    private Battle battle;
     private BattleInitiator battleInitiator;
 
     @Before
@@ -28,14 +27,16 @@ public class BattleInitiatorTest {
     }
 
     @Test
-    public void whenInstantiatedAndBothPlayersAreFightersThenNewBattleIsSet(){
-        assertNotNull(battleInitiator.getBattle());
+    public void whenInstantiatedAndBothPlayersAreFightersThenPlayersAreSet(){
+        assertNotNull(battleInitiator.getE1());
+        assertNotNull(battleInitiator.getE2());
     }
 
     @Test
-    public void whenInstantiatedAndAtLeastOnePlayerIsNotAFighterThenBattleIsNotSet(){
+    public void whenInstantiatedAndAtLeastOnePlayerIsNotAFighterThenPlayersAreNotSet(){
         Entity pacifistCreature = new NpcFriendly("Pacifist", 100);
         BattleInitiator pacifistBattle = new BattleInitiator(player, pacifistCreature);
-        assertNull(pacifistBattle.getBattle());
+        assertNull(pacifistBattle.getE1());
+        assertNull(pacifistBattle.getE2());
     }
 }

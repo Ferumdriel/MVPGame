@@ -40,6 +40,7 @@ public class Game {
             Random r = new Random();
             Entity creature = new Creature("Hiena Cmentarna", 100);
             BattleInitiator battleInitiator = new BattleInitiator(player, creature);
+            battleInitiator.initiateBattle();
         }else if (tmp.equals("3")){
                 player.savePlayer();
         }else if (tmp.equals("4")){
