@@ -9,10 +9,8 @@ import MVPGame.entities.player.Player;
 public class Battle {
     private Entity e1;
     private Entity e2;
-    private BattleInitiator battleInitiator;
 
     public Battle(BattleInitiator battleInitiator){
-        this.battleInitiator = battleInitiator;
         this.e1 = battleInitiator.getE1();
         this.e2 = battleInitiator.getE2();
     }

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="player")
 public class Player extends Entity {
-    private static final int healthGain = 50;
+    public static final int healthGain = 50;
 
 //    private int exp;
 //    private int level;
