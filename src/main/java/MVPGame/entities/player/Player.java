@@ -2,6 +2,7 @@ package MVPGame.entities.player;
 
 import MVPGame.entities.Entity;
 import MVPGame.parser.json.CreateJsonFromObject;
+import MVPGame.parser.json.CreatePlayerFromJson;
 import MVPGame.parser.xml.CreateXmlFromObject;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,40 +12,57 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="player")
 public class Player extends Entity {
-    public static final int healthGain = 50;
+    private static final int healthGain = 50;
 
-    private int exp;
-    private int level;
-    private int[] expRange = {0,100,200,300,400,500,600};
+//    private int exp;
+//    private int level;
+//    private int[] expRange = {0,100,200,300,400,500,600};
+    private Level currentLevel;
 
     public Player(String name, int health){
         super(name,health);
-        exp = 0;
-        level = 1;
+//        exp = 0;
+//        level = 1;
+        currentLevel = new Level();
     }
 
     public void addExp(int newExp){
-        System.out.println("Added " + newExp + " exp");
-        exp += newExp;
-        while(exp >= expRange[level]){
-            addLevel();
+        Level tmpLevel = currentLevel.copy();
+        currentLevel.addExp(newExp);
+        int levelDiff = currentLevel.getLevel() - tmpLevel.getLevel();
+        for(int i = 0; i < levelDiff; i++){
+            addStatsFromLevelUp();
         }
     }
 
-    private void addLevel(){
-        System.out.println("Congratulations you have advanced from level " + level + " to " + (level + 1));
-        exp = exp - expRange[level];
-        level++;
+    private void addStatsFromLevelUp(){
         setMaxHealth(getMaxHealth() + healthGain);
         setHealth(getMaxHealth());
     }
 
     public void savePlayer(){
         CreateJsonFromObject.create(this,getName());
-//        CreateXmlFromObject.create(this,getName());
         System.out.println("Player saved.");
     }
 
+    public static Player loadPlayer(String name){
+        Player tmp = CreatePlayerFromJson.create(name);
+        if(!tmp.areAllAttributesInstantiated()){
+            tmp = null;
+        }
+        return tmp;
+    }
+
+    private boolean areAllAttributesInstantiated(){
+        boolean attInstant;
+        try{
+            attInstant = getName()!=null && getMaxHealth()!=0 && currentLevel!=null;
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            return false;
+        }
+        return attInstant;
+    }
 
     @Override
     public int resolveFight() {
@@ -53,31 +71,12 @@ public class Player extends Entity {
         return hit;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public int[] getExpRange() {
-        return expRange;
-    }
-
     public static int getHealthGain() {
         return healthGain;
     }
 
-    public int getExp() {
-        return exp;
-    }
 
-    public void setExp(int exp) {
-        this.exp = exp;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setExpRange(int[] expRange) {
-        this.expRange = expRange;
+    public Level getCurrentLevel() {
+        return currentLevel;
     }
 }

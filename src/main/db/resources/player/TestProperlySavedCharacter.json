@@ -1,0 +1,16 @@
+{
+  "currentLevel": {
+    "exp": 50,
+    "expToNextLevel": 100,
+    "level": 1
+  },
+  "health": 10,
+  "maxHealth": 100,
+  "name": "TestProperlySavedCharacter",
+  "fightingInterface": {
+    "type": "MVPGame.entities.fightInterface.Fight",
+    "data": {
+      "dmg": 10
+    }
+  }
+}

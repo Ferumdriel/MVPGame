@@ -53,7 +53,7 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         if (sc.nextLine().equals("Yes")) {
             System.out.println("Type name of your character: ");
-            player = CreatePlayerFromJson.create(sc.nextLine());
+            player = Player.loadPlayer(sc.nextLine());
             if(player == null){
                 System.out.println("Player not found. Starting new game. Choose character's nickname.");
                 player = new Player(sc.nextLine(),100);
