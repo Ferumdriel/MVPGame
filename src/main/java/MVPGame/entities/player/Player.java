@@ -47,7 +47,7 @@ public class Player extends Entity {
 
     public static Player loadPlayer(String name){
         Player tmp = CreatePlayerFromJson.create(name);
-        if(!tmp.areAllAttributesInstantiated()){
+        if(tmp==null || !tmp.areAllAttributesInstantiated()){
             tmp = null;
         }
         return tmp;

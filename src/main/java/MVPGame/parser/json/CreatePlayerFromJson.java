@@ -28,7 +28,7 @@ public class CreatePlayerFromJson {
             tmp = gson.fromJson(fileReader, Player.class);
             return tmp;
         }catch(FileNotFoundException e){
-            e.printStackTrace();
+
         }
         return null;
     }
