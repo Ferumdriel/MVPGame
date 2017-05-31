@@ -4,7 +4,9 @@ import MVPGame.entities.Entity;
 import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.player.Player;
 import MVPGame.events.battle.BattleInitiator;
-import MVPGame.parser.json.CreatePlayerFromJson;
+import MVPGame.game.states.LoginState;
+import MVPGame.game.states.StateInterface;
+import MVPGame.game.states.WorldState;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -13,11 +15,13 @@ import java.util.Scanner;
  * Created by nazwa on 2017-05-21.
  */
 public class Game {
-    Player player;
-    boolean finish;
+    private Player player;
+    private boolean finish;
+    private StateInterface currentState;
 
     public Game(){
         finish = false;
+        currentState = new LoginState(this);
     }
 
     public String listenToPlayer(){
@@ -66,14 +70,35 @@ public class Game {
     }
 
     private boolean isGameDone(){
-        return !finish && player.isAlive();
+        return !currentState.isFinished() && player.isAlive();
     }
 
     public void run(){
-        prepareToLaunch();
+        if(currentState instanceof LoginState){
+            currentState.run();
+            if(currentState.isFinished()) {
+                setCurrentState(new WorldState(this));
+            }
+        }
         while(isGameDone()){
-            pickEvent();
+            currentState.run();
         }
         System.out.println("Game has ended");
+    }
+
+    private void setCurrentState(StateInterface state){
+        currentState = state;
+    }
+
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 }
