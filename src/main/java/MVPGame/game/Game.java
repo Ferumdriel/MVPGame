@@ -21,7 +21,6 @@ public class Game {
 
     public Game(){
         finish = false;
-        currentState = new LoginState(this);
     }
 
     public String listenToPlayer(){
@@ -70,20 +69,17 @@ public class Game {
     }
 
     private boolean isGameDone(){
-        return !currentState.isFinished() && player.isAlive();
+        return !currentState.isFinished();
     }
 
     public void run(){
-        if(currentState instanceof LoginState){
-            currentState.run();
-            if(currentState.isFinished()) {
-                setCurrentState(new WorldState(this));
-            }
-        }
+        currentState = new LoginState(this);
+        currentState.run();
+        setCurrentState(new WorldState(this));
+
         while(isGameDone()){
             currentState.run();
         }
-        System.out.println("Game has ended");
     }
 
     private void setCurrentState(StateInterface state){
