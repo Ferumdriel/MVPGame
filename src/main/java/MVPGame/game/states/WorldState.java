@@ -17,78 +17,72 @@ import java.util.Scanner;
 public class WorldState implements StateInterface{
     private Game game;
     private boolean finished;
+    private EventPicker picker;
 
     public WorldState(Game game){
         this.game = game;
-    }
-
-    private void pickEvent(Player player){
-        String tmp = listenToPlayer();
-        if(tmp.equals(PlayerChoice.HEAL.value)) {
-            healPlayer(player);
-        }else if(tmp.equals(PlayerChoice.FIGHT.value)) {
-            if(player.isAlive()) {
-                findBattle(player);
-            }else{
-                System.out.println("You can't fight now. You have to heal first");
-            }
-        }else if (tmp.equals(PlayerChoice.SAVE.value)){
-            player.savePlayer();
-        }else if (tmp.equals(PlayerChoice.EXIT.value)){
-            finished = true;
-            System.out.println("Game has ended.");
-        }
-    }
-
-    private void healPlayer(Player player){
-        player.setHealth(player.getMaxHealth());
-        System.out.println("Player fully healed");
-        System.out.println(player);
-    }
-    private void findBattle(Player player){
-        Random r = new Random();
-        Entity creature = new Creature("Hiena Cmentarna", 100);
-        BattleInitiator battleInitiator = new BattleInitiator(player, creature);
-        battleInitiator.initiateBattle();
-    }
-
-    private String listenToPlayer(){
-        Scanner sc = new Scanner(System.in);
-        displayOptions();
-        return sc.nextLine();
-    }
-
-    private void displayOptions(){
-        System.out.println("Choose action:");
-        System.out.println("1. Heal");
-        System.out.println("2. Fight");
-        System.out.println("3. Save");
-        System.out.println("4. Exit");
+        picker = new EventPicker();
     }
 
     public void run() {
-        pickEvent(game.getPlayer());
+        picker.pickEvent(game.getPlayer(), picker.listenToPlayer());
     }
 
     public boolean isFinished() {
         return finished;
     }
 
-    private enum PlayerChoice{
-        HEAL ("1"),
-        FIGHT ("2"),
-        SAVE ("3"),
-        EXIT("4");
-
-        private String value;
-
-        private PlayerChoice(String value){
-            this.value = value;
+/** EVENT PICKER **/
+class EventPicker {
+    void pickEvent(Player player, int option){
+            if(option == PlayerChoice.HEAL.getNumber()) {
+                healPlayer(player);
+            }else if(option == PlayerChoice.FIGHT.getNumber()) {
+                if(player.isAlive()) {
+                    findBattle(player);
+                }else{
+                    System.out.println("You can't fight now. You have to heal first");
+                }
+            }else if (option == PlayerChoice.SAVE.getNumber()){
+                player.savePlayer();
+            }else if (option == PlayerChoice.EXIT.getNumber()){
+                finished = true;
+                System.out.println("Game has ended.");
+            }
         }
 
-        public String toString(){
-            return value;
+        private void healPlayer(Player player){
+            player.setHealth(player.getMaxHealth());
+            System.out.println("Player fully healed");
+            System.out.println(player);
+        }
+        private void findBattle(Player player){
+            Random r = new Random();
+            Entity creature = new Creature("Hiena Cmentarna", 100);
+            BattleInitiator battleInitiator = new BattleInitiator(player, creature);
+            battleInitiator.initiateBattle();
         }
 
+        private int listenToPlayer(){
+            Scanner sc = new Scanner(System.in);
+            displayOptions();
+            return sc.nextInt();
+        }
+
+        private void displayOptions(){
+            System.out.println("Choose action:");
+            System.out.println(PlayerChoice.HEAL);
+            System.out.println(PlayerChoice.FIGHT);
+            System.out.println(PlayerChoice.SAVE);
+            System.out.println(PlayerChoice.EXIT);
+        }
+
+        public boolean isFinished() {
+            return finished;
+        }
+    }
+
+    EventPicker getPicker() {
+        return picker;
     }
 }
