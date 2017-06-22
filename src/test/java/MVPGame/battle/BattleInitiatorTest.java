@@ -22,7 +22,7 @@ public class BattleInitiatorTest {
     @Before
     public void setUp(){
         player = new Player("Player", 100);
-        creature = new Creature("Creature", 100);
+        creature = new Creature();
         battleInitiator = new BattleInitiator(player,creature);
     }
 
@@ -34,7 +34,7 @@ public class BattleInitiatorTest {
 
     @Test
     public void whenInstantiatedAndAtLeastOnePlayerIsNotAFighterThenPlayersAreNotSet(){
-        Entity pacifistCreature = new NpcFriendly("Pacifist", 100);
+        Entity pacifistCreature = new NpcFriendly();
         BattleInitiator pacifistBattle = new BattleInitiator(player, pacifistCreature);
         assertNull(pacifistBattle.getE1());
         assertNull(pacifistBattle.getE2());

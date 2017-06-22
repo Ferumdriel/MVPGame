@@ -5,10 +5,13 @@ package MVPGame.entities.creatures;
  */
 public class NpcHostile extends Creature {
 
-
-    public NpcHostile(String name, int health) {
-        super(name, health);
+    public NpcHostile(){
+//        setName("DefaultNpcHostile");
     }
+
+//    public NpcHostile(String name, int health) {
+//        super(name, health);
+//    }
 
 
 }

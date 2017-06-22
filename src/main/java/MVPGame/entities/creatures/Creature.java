@@ -9,9 +9,13 @@ import MVPGame.entities.fightInterface.FightingInterface;
  */
 public class Creature extends Entity {
 
-    public Creature(String name, int health){
-        super(name,health);
+    public Creature(){
+//        setName("DefaultCreature");
     }
+
+//    public Creature(String name, int health){
+//        super(name,health);
+//    }
 
     @Override
     public int resolveFight() {

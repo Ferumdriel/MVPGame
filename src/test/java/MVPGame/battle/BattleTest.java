@@ -23,7 +23,7 @@ public class BattleTest {
     @Before
     public void setUp(){
         player = new Player("Player", 100);
-        creature = new Creature("Creature", 100);
+        creature = new Creature();
         battleInitiator = new BattleInitiator(player,creature);
         battle = new Battle(battleInitiator);
     }

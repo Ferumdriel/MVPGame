@@ -20,7 +20,8 @@ public class Player extends Entity {
     private Level currentLevel;
 
     public Player(String name, int health){
-        super(name,health);
+        setName(name);
+        setHealth(health);
 //        exp = 0;
 //        level = 1;
         currentLevel = new Level();
