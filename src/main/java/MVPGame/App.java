@@ -13,9 +13,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        Entity player = new Player("Player", 100);
-        Entity creature = new NpcFriendly();
-        BattleInitiator initiator = new BattleInitiator(player,creature);
 
     }
 }

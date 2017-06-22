@@ -3,6 +3,8 @@ package MVPGame.battle;
 import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.Entity;
 import MVPGame.entities.creatures.NpcFriendly;
+import MVPGame.entities.creatures.friendly.Merchant;
+import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
 import MVPGame.events.battle.Battle;
 import MVPGame.events.battle.BattleInitiator;
@@ -22,7 +24,7 @@ public class BattleInitiatorTest {
     @Before
     public void setUp(){
         player = new Player("Player", 100);
-        creature = new Creature();
+        creature = new MonsterPicker().pickMonster();
         battleInitiator = new BattleInitiator(player,creature);
     }
 
@@ -34,7 +36,7 @@ public class BattleInitiatorTest {
 
     @Test
     public void whenInstantiatedAndAtLeastOnePlayerIsNotAFighterThenPlayersAreNotSet(){
-        Entity pacifistCreature = new NpcFriendly();
+        Entity pacifistCreature = new Merchant();
         BattleInitiator pacifistBattle = new BattleInitiator(player, pacifistCreature);
         assertNull(pacifistBattle.getE1());
         assertNull(pacifistBattle.getE2());

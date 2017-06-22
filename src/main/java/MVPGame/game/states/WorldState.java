@@ -2,6 +2,7 @@ package MVPGame.game.states;
 
 import MVPGame.entities.Entity;
 import MVPGame.entities.creatures.Creature;
+import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
 import MVPGame.events.battle.BattleInitiator;
 import MVPGame.game.Game;
@@ -58,7 +59,7 @@ class EventPicker {
         }
         private void findBattle(Player player){
             Random r = new Random();
-            Entity creature = new Creature("Hiena Cmentarna", 100);
+            Entity creature = new MonsterPicker().pickMonster();
             BattleInitiator battleInitiator = new BattleInitiator(player, creature);
             battleInitiator.initiateBattle();
         }

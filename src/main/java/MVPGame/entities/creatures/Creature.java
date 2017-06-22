@@ -7,7 +7,7 @@ import MVPGame.entities.fightInterface.FightingInterface;
 /**
  * Created by nazwa on 2017-05-17.
  */
-public class Creature extends Entity {
+public abstract class Creature extends Entity {
 
     public Creature(){
 //        setName("DefaultCreature");

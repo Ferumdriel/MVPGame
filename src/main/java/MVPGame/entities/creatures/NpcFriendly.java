@@ -5,7 +5,7 @@ import MVPGame.entities.fightInterface.NotFight;
 /**
  * Created by nazwa on 2017-05-21.
  */
-public class NpcFriendly extends Creature {
+public abstract class NpcFriendly extends Creature {
 
     public NpcFriendly(){
 //        setName("DefaultNpcFriendly");

@@ -2,6 +2,7 @@ package MVPGame.battle;
 
 import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.Entity;
+import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
 import MVPGame.events.battle.Battle;
 import MVPGame.events.battle.BattleInitiator;
@@ -23,7 +24,7 @@ public class BattleTest {
     @Before
     public void setUp(){
         player = new Player("Player", 100);
-        creature = new Creature();
+        creature = new MonsterPicker().pickMonster();
         battleInitiator = new BattleInitiator(player,creature);
         battle = new Battle(battleInitiator);
     }
