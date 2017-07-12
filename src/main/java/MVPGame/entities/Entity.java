@@ -2,6 +2,7 @@ package MVPGame.entities;
 
 import MVPGame.entities.fightInterface.Fight;
 import MVPGame.entities.fightInterface.FightingInterface;
+import MVPGame.events.battle.battleActions.Hit;
 
 /**
  * Created by nazwa on 2017-05-17.
@@ -26,7 +27,20 @@ public abstract class Entity {
 //        fightingInterface = new Fight();
 //    }
 
-    public abstract int resolveFight();
+    public int hitEntity(Entity e){
+        int dmgDone = resolveHit();
+        e.setHealth(e.getHealth() - dmgDone);
+        return dmgDone;
+    }
+
+    public int resolveHit(){
+        FightingInterface currentInterface = getFightingInterface();
+        int hit = currentInterface.fight();
+        if(currentInterface instanceof Fight) {
+            System.out.println(getName() + " hit for: " + hit);
+        }
+        return hit;
+    }
 
     public int getHealth() {
         return health;

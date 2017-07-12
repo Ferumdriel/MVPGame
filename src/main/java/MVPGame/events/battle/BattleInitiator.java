@@ -3,37 +3,54 @@ package MVPGame.events.battle;
 import MVPGame.entities.Entity;
 import MVPGame.entities.fightInterface.Fight;
 
+import java.util.Scanner;
+
 /**
  * Created by nazwa on 2017-05-21.
  */
 public class BattleInitiator {
-    private Entity e1;
-    private Entity e2;
+    private Entity player; //player
+    private Entity enemy; //enemy
+    enum battleType {AUTO, MANUAL}
 
-    public BattleInitiator(Entity e1, Entity e2){
-        if(e1.getFightingInterface() instanceof Fight && e2.getFightingInterface() instanceof Fight){
-            this.e1 = e1;
-            this.e2 = e2;
+
+    public BattleInitiator(Entity player, Entity enemy){
+        if(player.getFightingInterface() instanceof Fight && enemy.getFightingInterface() instanceof Fight){
+            this.player = player;
+            this.enemy = enemy;
         }
     }
 
     public void initiateBattle(){
-        if(e1!=null && e2!=null){
-            executeBattle(new Battle(this));
+        if(player !=null && enemy !=null){
+            System.out.println("Pick fight type: \n1. Manual \n2. Auto");
+            Scanner sc = new Scanner(System.in);
+            executeBattle(pickBattleType(sc.nextInt()));
         }else{
             System.out.println("You can't attack this entity");
         }
     }
 
-    private void executeBattle(Battle battle){
+    public BattleType pickBattleType(int battleType){
+        BattleType type;
+        if(battleType == 1){
+            type = new ManualBattle();
+        }else{
+            type = new AutoBattle();
+        }
+        return type;
+    }
+
+    void executeBattle(BattleType type){
+        Battle battle = new Battle(this, type);
         battle.resolveBattle();
     }
 
-    public Entity getE1() {
-        return e1;
+    public Entity getPlayer() {
+        return player;
     }
 
-    public Entity getE2() {
-        return e2;
+    public Entity getEnemy() {
+        return enemy;
     }
 }

@@ -1,13 +1,12 @@
 package MVPGame.battle;
 
-import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.Entity;
-import MVPGame.entities.creatures.NpcFriendly;
 import MVPGame.entities.creatures.friendly.Merchant;
 import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
-import MVPGame.events.battle.Battle;
+import MVPGame.events.battle.AutoBattle;
 import MVPGame.events.battle.BattleInitiator;
+import MVPGame.events.battle.ManualBattle;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,15 +29,25 @@ public class BattleInitiatorTest {
 
     @Test
     public void whenInstantiatedAndBothPlayersAreFightersThenPlayersAreSet(){
-        assertNotNull(battleInitiator.getE1());
-        assertNotNull(battleInitiator.getE2());
+        assertNotNull(battleInitiator.getPlayer());
+        assertNotNull(battleInitiator.getEnemy());
     }
 
     @Test
     public void whenInstantiatedAndAtLeastOnePlayerIsNotAFighterThenPlayersAreNotSet(){
         Entity pacifistCreature = new Merchant();
         BattleInitiator pacifistBattle = new BattleInitiator(player, pacifistCreature);
-        assertNull(pacifistBattle.getE1());
-        assertNull(pacifistBattle.getE2());
+        assertNull(pacifistBattle.getPlayer());
+        assertNull(pacifistBattle.getEnemy());
+    }
+
+    @Test
+    public void whenPlayerPicksNumberOneThenReturnManualBattle(){
+        assertTrue(battleInitiator.pickBattleType(1) instanceof ManualBattle);
+    }
+
+    @Test
+    public void whenPlayerPicksNumberTwoThenReturnAutoBattle(){
+        assertTrue(battleInitiator.pickBattleType(2) instanceof AutoBattle);
     }
 }

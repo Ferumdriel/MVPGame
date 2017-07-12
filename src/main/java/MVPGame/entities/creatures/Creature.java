@@ -17,13 +17,13 @@ public abstract class Creature extends Entity {
 //        super(name,health);
 //    }
 
-    @Override
-    public int resolveFight() {
-        FightingInterface currentInterface = getFightingInterface();
-        int hit = currentInterface.fight();
-        if(currentInterface instanceof Fight) {
-            System.out.println(getName() + " hit for: " + hit);
-        }
-        return hit;
-    }
+//    @Override
+//    public int resolveHit() {
+//        FightingInterface currentInterface = getFightingInterface();
+//        int hit = currentInterface.fight();
+//        if(currentInterface instanceof Fight) {
+//            System.out.println(getName() + " hit for: " + hit);
+//        }
+//        return hit;
+//    }
 }

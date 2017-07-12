@@ -1,6 +1,7 @@
 package MVPGame.game.states;
 
 import MVPGame.entities.Entity;
+import MVPGame.entities.ExtraActions;
 import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
@@ -53,9 +54,10 @@ class EventPicker {
         }
 
         private void healPlayer(Player player){
-            player.setHealth(player.getMaxHealth());
-            System.out.println("Player fully healed");
-            System.out.println(player);
+            ExtraActions.healUnit(player);
+//            player.setHealth(player.getMaxHealth());
+//            System.out.println("Player fully healed");
+//            System.out.println(player);
         }
         private void findBattle(Player player){
             Random r = new Random();

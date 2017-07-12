@@ -4,6 +4,7 @@ import MVPGame.entities.creatures.Creature;
 import MVPGame.entities.Entity;
 import MVPGame.entities.creatures.monsters.MonsterPicker;
 import MVPGame.entities.player.Player;
+import MVPGame.events.battle.AutoBattle;
 import MVPGame.events.battle.Battle;
 import MVPGame.events.battle.BattleInitiator;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class BattleTest {
         player = new Player("Player", 100);
         creature = new MonsterPicker().pickMonster();
         battleInitiator = new BattleInitiator(player,creature);
-        battle = new Battle(battleInitiator);
+        battle = new Battle(battleInitiator, new AutoBattle());
     }
 
     @Test

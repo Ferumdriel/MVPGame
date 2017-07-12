@@ -65,12 +65,12 @@ public class Player extends Entity {
         return attInstant;
     }
 
-    @Override
-    public int resolveFight() {
-        int hit = getFightingInterface().fight();
-        System.out.println(getName() + " hit for: " + hit);
-        return hit;
-    }
+//    @Override
+//    public int resolveHit() {
+//        int hit = getFightingInterface().fight();
+//        System.out.println(getName() + " hit for: " + hit);
+//        return hit;
+//    }
 
     public static int getHealthGain() {
         return healthGain;
