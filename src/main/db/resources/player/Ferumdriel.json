@@ -1,0 +1,16 @@
+{
+  "currentLevel": {
+    "exp": 30,
+    "expToNextLevel": 100,
+    "level": 1
+  },
+  "health": 100,
+  "maxHealth": 100,
+  "name": "Ferumdriel",
+  "fightingInterface": {
+    "type": "MVPGame.entities.fightInterface.Fight",
+    "data": {
+      "dmg": 10
+    }
+  }
+}
